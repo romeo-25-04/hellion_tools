@@ -1,10 +1,11 @@
 from src.systems import System, Planet, Asteroid
 from src.orbit import Coordinates
-
+from src.building import Module, Port
 
 first_planet = Planet("Tasciana", Coordinates(1, 2, 3, 4, 5, 6))
 second_planet = Planet("Hillariath", Coordinates(11, 12, 13, 14, 15, 16))
 asterroid = Asteroid("Asterroid_ABC123")
+asterroid.coordinates = Coordinates(4, 5, 6, 9, 9, 9)
 first_planet.add_object(asterroid)
 
 arthnar = System(name="Arthnar",
@@ -17,15 +18,14 @@ arthnar.add_object(second_planet)
 
 # print(arthnar.objects)
 
-print(arthnar.DESCRIPTION)
-print(asterroid.DESCRIPTION)
-
-
-print(arthnar.to_json())
-
-first_planet.del_object_by_name("Asterroid_ABC")
-
-print(arthnar.to_json())
+# Construct a module
+starter_module = Module(name="Ship_27BCBC0")
+starter_module.description = "Starting Command Module"
+starter_module.add_port(Port.standard)
+starter_module.add_port(Port.standard)
+starter_module.coordinates.first = 55
+# add it to asteroid
+asterroid.add_object(starter_module)
 
 with open("var/hellion_system.json", "w") as fl:
     fl.write(arthnar.to_json())
