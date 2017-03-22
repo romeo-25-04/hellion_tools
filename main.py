@@ -1,14 +1,29 @@
-from src.systems import System, Planet
+from src.systems import System, Planet, Asteroid
 from src.orbit import Coordinates
 
 
-first_planet = Planet("First", Coordinates(1, 2, 3, 4, 5, 6))
-second_planet = Planet("Second", Coordinates(11, 12, 13, 14, 15, 16))
+first_planet = Planet("Tasciana", Coordinates(1, 2, 3, 4, 5, 6))
+second_planet = Planet("Hillariath", Coordinates(11, 12, 13, 14, 15, 16))
+asterroid = Asteroid("Asterroid_ABC123")
+first_planet.add_object(asterroid)
 
-arthnar = System(name="arthnar",
-                 coordinates=Coordinates(7, 8, 9, 10, 11, 12),
-                 planets={1: first_planet,
-                       2: second_planet})
+arthnar = System(name="Arthnar",
+                 coordinates=Coordinates(7, 8, 9, 10, 11, 12))
+
+arthnar.add_object(first_planet)
+arthnar.add_object(second_planet)
+
+# print(arthnar.objects["Tasciana"].objects["Asterroid_ABC123"].coordinates.first)
+
+# print(arthnar.objects)
+
+print(arthnar.DESCRIPTION)
+print(asterroid.DESCRIPTION)
+
+
+print(arthnar.to_json())
+
+first_planet.del_object_by_name("Asterroid_ABC")
 
 print(arthnar.to_json())
 
